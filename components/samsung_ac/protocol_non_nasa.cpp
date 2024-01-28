@@ -286,7 +286,6 @@ namespace esphome
             switch (value)
             {
             case NonNasaMode::Auto:
-            case NonNasaMode::Auto_Heat:
                 return Mode::Auto;
             case NonNasaMode::Cool:
                 return Mode::Cool;
