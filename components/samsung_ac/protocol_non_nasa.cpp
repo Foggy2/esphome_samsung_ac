@@ -45,7 +45,7 @@ namespace esphome
             str += "src:" + src + ";";
             str += "dst:" + dst + ";";
             str += "cmd:" + long_to_hex(cmd) + ";";
-            if (cmd == 0x20)
+            if (cmd == 0x20 || cmd == 0x52 || cmd == 0x53)
                 str += "command20:{" + command20.to_string() + "}";
             str += "}";
             return str;
@@ -101,12 +101,22 @@ namespace esphome
                 command20.fanspeed = (NonNasaFanspeed)((data[7] & 0b00000111));
                 command20.power = data[8] & 0b10000000;
                 command20.pipe_out = data[11] - 55;
+                // use last recorded values because this packet does not contain all properties
+                command20.mode = last_command20_.mode;
 
                 return DecodeResult::Ok;
             }
             case 0x53:
             {
                 command20.mode = (NonNasaMode)(data[11] & 0b00111111);
+                // use last recorded values because this packet does not contain all properties
+                command20.target_temp = last_command20_.target_temp;
+                command20.room_temp = last_command20_.room_temp;
+                command20.pipe_in = last_command20_.pipe_in;
+                command20.wind_direction = last_command20_.wind_direction;
+                command20.fanspeed = last_command20_.fanspeed;
+                command20.power = last_command20_.power;
+                command20.pipe_out = last_command20_.pipe_out;
                 
                 return DecodeResult::Ok;
             }
