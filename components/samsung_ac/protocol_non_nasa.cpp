@@ -341,7 +341,7 @@ namespace esphome
 
             target->register_address(nonpacket_.src);
 
-            if (nonpacket_.cmd == 0x20)
+            if (nonpacket_.cmd == 0x20 || nonpacket_.cmd == 0x52 || nonpacket_.cmd == 0x53)
             {
                 last_command20s_[nonpacket_.src] = nonpacket_.command20;
                 target->set_target_temperature(nonpacket_.src, nonpacket_.command20.target_temp);
