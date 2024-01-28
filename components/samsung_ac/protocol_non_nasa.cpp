@@ -92,6 +92,24 @@ namespace esphome
 
                 return DecodeResult::Ok;
             }
+            case 0x52:
+            {
+                command20.target_temp = data[4] - 55;
+                command20.room_temp = data[5] - 55;
+                command20.pipe_in = data[6] - 55;
+                command20.wind_direction = (NonNasaWindDirection)((data[7]) >> 3);
+                command20.fanspeed = (NonNasaFanspeed)((data[7] & 0b00000111));
+                command20.power = data[8] & 0b10000000;
+                command20.pipe_out = data[11] - 55;
+
+                return DecodeResult::Ok;
+            }
+            case 0x53:
+            {
+                command20.mode = (NonNasaMode)(data[11] & 0b00111111);
+                
+                return DecodeResult::Ok;
+            }
             case 0xc6:
             {
                 // makes only sens src == "c8" && dst == "d0"
