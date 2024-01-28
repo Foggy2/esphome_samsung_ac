@@ -20,12 +20,11 @@ namespace esphome
 
         enum class NonNasaMode : uint8_t
         {
-            Heat = 0x01,
-            Cool = 0x02,
-            Dry = 0x04,
-            Fan = 0x08,
-            Auto_Heat = 0x21,
-            Auto = 0x22
+            Auto = 0x0,
+            Cool = 0x01,
+            Dry = 0x02,
+            Fan = 0x03,
+            Heat = 0x04
         };
 
         enum class NonNasaWindDirection : uint8_t
