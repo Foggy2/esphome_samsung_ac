@@ -102,7 +102,8 @@ namespace esphome
                 command20.power = data[8] & 0b10000000;
                 command20.pipe_out = data[11] - 55;
                 // use last recorded values because this packet does not contain all properties
-                auto last_command20_ = last_command20s_[data[2]];
+                std::string src_address = data[2];
+                auto last_command20_ = last_command20s_[src_address];
                 command20.mode = last_command20_.mode;
 
                 return DecodeResult::Ok;
@@ -111,7 +112,8 @@ namespace esphome
             {
                 command20.mode = (NonNasaMode)(data[11] & 0b00111111);
                 // use last recorded values because this packet does not contain all properties
-                auto last_command20_ = last_command20s_[data[2]];
+                std::string src_address = data[2];
+                auto last_command20_ = last_command20s_[src_address];
                 command20.target_temp = last_command20_.target_temp;
                 command20.room_temp = last_command20_.room_temp;
                 command20.pipe_in = last_command20_.pipe_in;
