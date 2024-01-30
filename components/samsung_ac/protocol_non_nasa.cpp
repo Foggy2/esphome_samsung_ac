@@ -180,7 +180,7 @@ namespace esphome
         {
             std::vector<uint8_t> data{
                 0x32,                     // 00 start
-                0x85,                     // 01 src
+                0x84,                     // 01 src
                 (uint8_t)hex_to_int(dst), // 02 dst
                 0xA0,                     // 03 cmd
                 0x1F,                     // 04
