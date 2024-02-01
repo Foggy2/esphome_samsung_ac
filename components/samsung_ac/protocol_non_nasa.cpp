@@ -16,8 +16,8 @@ namespace esphome
     {
         uint8_t build_checksum(std::vector<uint8_t> &data)
         {
-            uint8_t sum = data[1];
-            for (uint8_t i = 2; i < 12; i++)
+            uint8_t sum = 0;
+            for (uint8_t i = 1; i < 12; i++)
             {
                 sum = sum ^ data[i];
             }
@@ -204,7 +204,7 @@ namespace esphome
             data[6] = (target_temp & 31U) | encode_request_fanspeed(fanspeed);
             data[7] = (uint8_t)encode_request_mode(mode);
             data[8] = !power ? (uint8_t)0xC4 : (uint8_t)0xF4;
-            data[8] |= (individual ? 6U : 4U);
+            //data[8] |= (individual ? 6U : 4U);
             data[9] = 0;
             data[12] = build_checksum(data);
 
