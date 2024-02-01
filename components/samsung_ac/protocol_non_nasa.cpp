@@ -199,8 +199,8 @@ namespace esphome
             // seems to be like a building management system.
             bool individual = false;
 
-            if (room_temp > 0)
-                data[5] = room_temp;
+            //if (room_temp > 0)
+            //    data[5] = room_temp;
             data[6] = (target_temp & 31U) | encode_request_fanspeed(fanspeed);
             data[7] = (uint8_t)encode_request_mode(mode);
             data[8] = !power ? (uint8_t)0xC4 : (uint8_t)0xF4;
