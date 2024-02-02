@@ -234,14 +234,16 @@ namespace esphome
         {
             auto request = NonNasaRequest::create(address);
             request.power = value;
-            nonnasa_requests.push(request);
+            auto data = request.encode();
+            target->publish_data(data);
         }
 
         void NonNasaProtocol::publish_target_temp_message(MessageTarget *target, const std::string &address, float value)
         {
             auto request = NonNasaRequest::create(address);
             request.target_temp = value;
-            nonnasa_requests.push(request);
+            auto data = request.encode();
+            target->publish_data(data);
         }
 
         NonNasaMode mode_to_nonnasa_mode(Mode value)
@@ -267,7 +269,8 @@ namespace esphome
         {
             auto request = NonNasaRequest::create(address);
             request.mode = mode_to_nonnasa_mode(value);
-            nonnasa_requests.push(request);
+            auto data = request.encode();
+            target->publish_data(data);
         }
 
         NonNasaFanspeed fanmode_to_nonnasa_fanspeed(FanMode value)
@@ -290,7 +293,8 @@ namespace esphome
         {
             auto request = NonNasaRequest::create(address);
             request.fanspeed = fanmode_to_nonnasa_fanspeed(value);
-            nonnasa_requests.push(request);
+            auto data = request.encode();
+            target->publish_data(data);
         }
 
         Mode nonnasa_mode_to_mode(NonNasaMode value)
