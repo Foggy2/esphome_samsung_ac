@@ -234,16 +234,14 @@ namespace esphome
         {
             auto request = NonNasaRequest::create(address);
             request.power = value;
-            auto data = request.encode();
-            target->publish_data(data);
+            nonnasa_requests.push(request);
         }
 
         void NonNasaProtocol::publish_target_temp_message(MessageTarget *target, const std::string &address, float value)
         {
             auto request = NonNasaRequest::create(address);
             request.target_temp = value;
-            auto data = request.encode();
-            target->publish_data(data);
+            nonnasa_requests.push(request);
         }
 
         NonNasaMode mode_to_nonnasa_mode(Mode value)
@@ -269,8 +267,7 @@ namespace esphome
         {
             auto request = NonNasaRequest::create(address);
             request.mode = mode_to_nonnasa_mode(value);
-            auto data = request.encode();
-            target->publish_data(data);
+            nonnasa_requests.push(request);
         }
 
         NonNasaFanspeed fanmode_to_nonnasa_fanspeed(FanMode value)
@@ -293,8 +290,7 @@ namespace esphome
         {
             auto request = NonNasaRequest::create(address);
             request.fanspeed = fanmode_to_nonnasa_fanspeed(value);
-            auto data = request.encode();
-            target->publish_data(data);
+            nonnasa_requests.push(request);
         }
 
         Mode nonnasa_mode_to_mode(NonNasaMode value)
@@ -356,9 +352,9 @@ namespace esphome
                 target->set_mode(nonpacket_.src, nonnasa_mode_to_mode(nonpacket_.command20.mode));
                 target->set_fanmode(nonpacket_.src, nonnasa_fanspeed_to_fanmode(nonpacket_.command20.fanspeed));
             }
-            else if (nonpacket_.cmd == 0xc6)
+            else if (nonpacket_.cmd == 0xd1)
             {
-                if (nonpacket_.src == "c8" && nonpacket_.dst == "d0")
+                if (nonpacket_.src == "84" && nonpacket_.dst == "ad")
                 {
                     ESP_LOGW(TAG, "control_status=%d", nonpacket_.commandC6.control_status);
 
