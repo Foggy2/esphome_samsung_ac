@@ -208,7 +208,7 @@ namespace esphome
             data[9] = 0;
             data[12] = build_checksum(data);
 
-            data[9] = (uint8_t)0x21;
+            //data[9] = (uint8_t)0x21;
 
             return data;
         }
