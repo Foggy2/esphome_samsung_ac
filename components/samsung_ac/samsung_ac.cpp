@@ -75,6 +75,7 @@ namespace esphome
 
     void Samsung_AC::publish_data(std::vector<uint8_t> &data)
     {
+      ESP_LOGW(TAG, "write %s", bytes_to_hex(data).c_str());
       this->write_array(data);
       this->flush();
     }
