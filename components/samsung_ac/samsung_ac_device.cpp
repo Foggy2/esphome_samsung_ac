@@ -98,7 +98,7 @@ namespace esphome
         }
         else
         {
-          device->write_power(true);
+          //device->write_power(true);
           device->write_mode(climatemode_to_mode(modeOpt.value()));
         }
       }
